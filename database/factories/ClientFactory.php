@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\RoleEnum;
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,8 +20,8 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'address_id' => fake()->numberBetween(1, 10),
-            'user_id' => User::factory(),
+            'address_id' => Address::inRandomOrder()->value('id'),
+            'user_id' => User::factory()->create(['role_id' => RoleEnum::CLIENT]),
         ];
     }
 }
