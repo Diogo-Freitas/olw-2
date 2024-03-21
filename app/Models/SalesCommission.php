@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\BelongsToCompany;
 use Illuminate\Database\Eloquent\Model;
 
 class SalesCommission extends Model
 {
+    use BelongsToCompany;
+
     protected $table = "sales_commission_view";
+
     public $incrementing = false;
+    
     public $timestamps = false;
 
     public function scopeGetColumns()
