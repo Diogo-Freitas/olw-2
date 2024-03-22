@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Enums\RoleEnum;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,5 +37,13 @@ class AppServiceProvider extends ServiceProvider
         // if (!empty($proxy_scheme)) {
         //     URL::forceScheme($proxy_scheme);
         // }
+
+        Gate::define('impersonate', function(User $user){
+            return $user->role_id === RoleEnum::ADMIN;
+        });
+
+        Gate::define('leavel-impersonate', function(User $user){
+            return session()->has('impersonate') && User::find(session('impersonate'))->role_id === RoleEnum::ADMIN;
+        });
     }
 }
