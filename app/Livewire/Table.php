@@ -4,10 +4,13 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Reactive;
 
 class Table extends Component
 {
     use WithPagination;
+
+    #[Reactive]
 
     public string $resource;
     public array $columns;
