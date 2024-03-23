@@ -15,7 +15,7 @@ class ImpersonateController extends Controller
 
         auth()->loginUsingId($user_id);
 
-        return redirect()->back();
+        return redirect()->route('clients.index');
     }
 
     public function leavelImpresonating()
@@ -26,6 +26,6 @@ class ImpersonateController extends Controller
 
         session()->forget('company_id');
 
-        return redirect()->back();
+        return redirect()->route('clients.index');
     }
 }
